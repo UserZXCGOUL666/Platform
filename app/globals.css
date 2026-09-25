@@ -217,3 +217,238 @@ html[data-theme="dark"] .profile-popover{box-shadow:0 20px 60px #0008}
 @media(max-width:900px){
   .device-switch{min-width:0;width:100%}
 }
+
+/* ===== Mobile preview stabilization patch (2026-09-25) ===== */
+.app.device-mobile .main{
+  width:100%;
+  max-width:none;
+  padding:18px 16px 92px;
+  overflow-x:hidden;
+}
+.app.device-mobile .page-title{
+  margin-bottom:20px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.app.device-mobile .page-title .quiet-badge{
+  white-space:normal;
+}
+.app.device-mobile .banners{
+  grid-template-columns:1fr;
+  gap:14px;
+}
+.app.device-mobile .feature-banner,
+.app.device-mobile .service-banner{
+  min-height:205px;
+  padding:20px;
+}
+.app.device-mobile .feature-banner h2,
+.app.device-mobile .service-banner h2{
+  font-size:28px;
+}
+.app.device-mobile .feature-banner img{
+  width:48%;
+}
+.app.device-mobile .category-row{
+  padding-bottom:18px;
+}
+.app.device-mobile .catalog-toolbar{
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:stretch;
+  gap:12px;
+  padding:18px 0;
+}
+.app.device-mobile .catalog-toolbar .segmented{
+  width:max-content;
+  max-width:100%;
+  overflow:auto;
+}
+.app.device-mobile .catalog-toolbar .result-count{
+  display:block;
+  font-size:12px;
+}
+.app.device-mobile .catalog-toolbar .toolbar-right{
+  margin-left:0;
+  width:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+}
+.app.device-mobile .catalog-toolbar .toolbar-right select{
+  display:block;
+  width:100%;
+  min-width:0;
+  height:40px;
+  padding:0 12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:var(--text);
+}
+.app.device-mobile .catalog-toolbar .toolbar-right .secondary{
+  min-height:40px;
+  white-space:nowrap;
+  padding-inline:12px;
+}
+.app.device-mobile .product-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px 12px;
+}
+.app.device-mobile .product-photo{
+  height:188px;
+}
+.app.device-mobile .orders{
+  grid-template-columns:1fr;
+}
+.app.device-mobile .order-card{
+  width:100%;
+  max-width:none;
+}
+.app.device-mobile .order-item{
+  grid-template-columns:64px 1fr auto;
+  gap:10px;
+}
+.app.device-mobile .chat{
+  display:flex;
+  flex-direction:column;
+  min-height:620px;
+  height:auto;
+  overflow:hidden;
+}
+.app.device-mobile .chat-list{
+  display:grid;
+  width:100%;
+  height:auto;
+  max-height:240px;
+  overflow:auto;
+  border-right:0;
+  border-bottom:1px solid var(--line);
+}
+.app.device-mobile .chat-list button{
+  width:100%;
+  min-width:0;
+  border-right:0;
+  border-bottom:1px solid var(--line);
+  padding:14px 14px;
+  text-align:left;
+}
+.app.device-mobile .chat-list button:last-child{
+  border-bottom:0;
+}
+.app.device-mobile .chat-list .avatar{
+  display:inline-flex;
+}
+.app.device-mobile .chat-list small,
+.app.device-mobile .chat-list strong{
+  max-width:none;
+}
+.app.device-mobile .chat-window{
+  min-width:0;
+  width:100%;
+  min-height:380px;
+  display:flex;
+  flex-direction:column;
+}
+.app.device-mobile .chat-heading{
+  padding:14px 16px;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.app.device-mobile .chat-messages{
+  min-height:260px;
+  padding:16px;
+}
+.app.device-mobile .chat-input{
+  padding:12px;
+  gap:8px;
+}
+.app.device-mobile .chat-input input{
+  min-width:0;
+  flex:1;
+}
+.app.device-mobile .chat-note{
+  font-size:10px;
+}
+.app.device-mobile .metric-grid,
+.app.device-mobile .admin-metrics{
+  grid-template-columns:1fr 1fr;
+}
+.app.device-mobile .admin-tabs{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  gap:8px;
+  padding:4px 0 16px;
+  margin-right:0;
+}
+.app.device-mobile .admin-tabs button{
+  flex:0 0 auto;
+}
+.app.device-mobile .admin-profile{
+  flex-direction:column;
+  align-items:flex-start;
+}
+.app.device-mobile .analytics-grid{
+  grid-template-columns:1fr;
+  gap:14px;
+}
+.app.device-mobile .panel-heading{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:8px;
+}
+.app.device-mobile .admin-row{
+  display:grid;
+  grid-template-columns:70px minmax(0,1fr);
+  gap:10px;
+  align-items:start;
+}
+.app.device-mobile .admin-row>img{
+  width:70px;
+  height:70px;
+  grid-row:1 / span 2;
+}
+.app.device-mobile .admin-row>div{
+  min-width:0;
+}
+.app.device-mobile .admin-row>select,
+.app.device-mobile .admin-row>button{
+  grid-column:1 / -1;
+  width:100%;
+}
+.app.device-mobile .admin-message{
+  gap:12px;
+  padding:13px;
+}
+.app.device-mobile .table-wrap{
+  overflow:auto;
+}
+.app.device-mobile .table-wrap table{
+  min-width:560px;
+}
+.app.device-mobile .footer{
+  padding-inline:16px;
+}
+
+html[data-theme="dark"] .app.device-mobile .catalog-toolbar .toolbar-right select{
+  background:var(--surface);
+  border-color:var(--line);
+  color:var(--text);
+}
+
+@media(max-width:380px){
+  .app.device-mobile .metric-grid,
+  .app.device-mobile .admin-metrics{
+    grid-template-columns:1fr;
+  }
+  .app.device-mobile .product-grid{
+    grid-template-columns:1fr 1fr;
+  }
+  .app.device-mobile .catalog-toolbar .toolbar-right{
+    grid-template-columns:1fr;
+  }
+}
