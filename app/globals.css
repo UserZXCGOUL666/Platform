@@ -41,3 +41,179 @@ html[data-theme="dark"] .admin-message,html[data-theme="dark"] .consent-banner{b
 @media(max-width:900px){.admin-metrics{grid-template-columns:repeat(2,1fr)}.admin-row select{min-width:130px}.consent-banner{align-items:stretch;flex-direction:column;gap:14px}.consent-banner>div:last-child{justify-content:flex-end}}
 @media(max-width:640px){.admin-metrics{grid-template-columns:1fr 1fr}.admin-tabs{margin-right:-17px;padding-right:17px}.admin-message{padding:13px}.consent-banner{bottom:78px;padding:15px}.consent-banner>div:last-child{display:grid;grid-template-columns:1fr 1fr}.consent-banner button{font-size:11px;padding-inline:8px}.listing-row.admin-row{display:grid;grid-template-columns:70px 1fr}.admin-row>select,.admin-row>button{grid-column:1/-1;width:100%}}
 .panel-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px}.panel-heading h2{margin:0}
+
+/* ===== Seller funnel layout + dark-theme fix (2026-09-25) ===== */
+.board-summary{
+  background:var(--surface);
+  color:var(--text);
+  border-color:var(--line);
+  flex-wrap:wrap;
+}
+.board-summary>span{min-width:0}
+.board-summary .muted{color:var(--muted)}
+
+/* On desktop the six pipeline stages fit into the content area instead of
+   forcing a horizontal scrollbar. DnD behaviour is unchanged. */
+.board{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:12px;
+  overflow:visible;
+  padding-bottom:0;
+  align-items:stretch;
+}
+.board-column{
+  min-width:0;
+  width:auto;
+  padding:12px;
+}
+.board-column h3{min-width:0}
+.board-column h3 small{flex:0 0 auto}
+.lead-card{min-width:0}
+.lead-person{min-width:0}
+.lead-card h4,.lead-card p{overflow-wrap:anywhere}
+
+html[data-theme="dark"] .board-summary{
+  background:var(--surface);
+  color:var(--text);
+  border-color:var(--line);
+}
+html[data-theme="dark"] .board-column{
+  background:var(--surface-2);
+  border:1px solid var(--line);
+}
+html[data-theme="dark"] .board-column h3 small{
+  background:var(--surface-3);
+  color:var(--text);
+}
+html[data-theme="dark"] .lead-card select{
+  background:var(--surface-2);
+  border-color:var(--line);
+  color:var(--text);
+}
+html[data-theme="dark"] .column-empty{color:var(--muted)}
+
+/* Below desktop width the board intentionally becomes horizontally scrollable,
+   because keeping readable cards is more useful than squeezing six columns. */
+@media(max-width:1250px){
+  .board{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    padding-bottom:14px;
+    scroll-snap-type:x proximity;
+    scrollbar-width:thin;
+    scrollbar-color:color-mix(in srgb,var(--muted) 55%,transparent) transparent;
+  }
+  .board-column{
+    flex:0 0 238px;
+    min-width:238px;
+    width:238px;
+    scroll-snap-align:start;
+  }
+}
+@media(max-width:760px){
+  .board-summary{gap:10px 18px;padding:14px 15px}
+  .board-summary .muted{width:100%;max-width:none;margin-left:0}
+  .board-column{flex-basis:86vw;min-width:86vw;width:86vw}
+}
+
+/* ===== Manual desktop/mobile view + profile menu (2026-09-25) ===== */
+.profile-menu{position:relative;flex:0 0 auto}
+.profile-menu>summary{list-style:none}
+.profile-menu>summary::-webkit-details-marker{display:none}
+.profile-menu[open] .profile-chevron{transform:rotate(180deg)}
+.profile-chevron{color:var(--muted);transition:transform .18s ease;flex:0 0 auto}
+.profile-popover{position:absolute;right:0;top:calc(100% + 10px);width:280px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 55px #0b173027;z-index:80;display:grid;gap:4px}
+.profile-popover>button{width:100%;display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:10px;text-align:left;color:var(--text)}
+.profile-popover>button:hover{background:var(--surface-hover);color:var(--blue)}
+.profile-popover>button>span{min-width:0}
+.profile-popover>button strong,.profile-popover>button small{display:block}
+.profile-popover>button strong{font-size:12px}
+.profile-popover>button small{margin-top:2px;font-size:10px;color:var(--muted)}
+.profile-popover-section{padding:10px 8px 9px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:3px 0}
+.profile-popover-section>span{display:block;margin:0 2px 7px;color:var(--muted);font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.08em}
+.device-switch{display:inline-grid;grid-template-columns:1fr 1fr;gap:3px;padding:3px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;min-width:260px}
+.device-switch button{min-height:38px;padding:7px 13px;border-radius:7px;display:flex;align-items:center;justify-content:center;gap:7px;color:var(--muted);font-size:12px;font-weight:700}
+.device-switch button:hover{color:var(--text)}
+.device-switch button.selected{background:var(--surface);color:var(--blue);box-shadow:0 1px 5px #00000010}
+.device-switch.compact{display:grid;width:100%;min-width:0}
+.device-switch.compact button{min-height:34px;padding:6px 8px;font-size:11px}
+html[data-theme="dark"] .profile-popover{box-shadow:0 20px 60px #0008}
+
+/* Smartphone view can be previewed/used on any viewport. */
+.app.device-mobile{min-height:100vh}
+.app.device-mobile .workspace{width:min(100%,480px);max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:66px;border-inline:1px solid var(--line);background:var(--bg)}
+.app.device-mobile .market-header{width:100%}
+.app.device-mobile .header-main{height:auto;min-height:72px;display:grid;grid-template-columns:auto 1fr auto;gap:10px;padding:10px 12px}
+.app.device-mobile .brand-logo{width:104px;min-width:104px;height:42px}
+.app.device-mobile .brand-logo img{width:94px}
+.app.device-mobile .search{grid-column:1/-1;grid-row:2;height:43px}
+.app.device-mobile .search button{display:none}
+.app.device-mobile .city-select{display:none}
+.app.device-mobile .top-actions{grid-column:3;grid-row:1;gap:0;margin-left:0}
+.app.device-mobile .top-actions .header-action:nth-child(2){display:none}
+.app.device-mobile .header-action{min-width:39px;width:39px;height:44px;padding:4px}
+.app.device-mobile .header-action small{display:none}
+.app.device-mobile .header-profile{min-width:auto;height:44px;padding:3px;gap:4px}
+.app.device-mobile .header-profile .avatar{width:34px;height:34px}
+.app.device-mobile .profile-summary-text,.app.device-mobile .profile-chevron{display:none}
+.app.device-mobile .profile-popover{position:fixed;right:max(12px,calc((100vw - 480px)/2 + 12px));top:64px;width:min(280px,calc(100vw - 24px))}
+.app.device-mobile .header-nav{height:48px;padding-inline:14px;overflow-x:auto;scrollbar-width:none;gap:9px}
+.app.device-mobile .mode-toggle{min-width:132px}
+.app.device-mobile .mode-toggle button{font-size:12px;padding-inline:9px}
+.app.device-mobile .market-nav{flex:none}
+.app.device-mobile .market-nav button{font-size:11px;padding-inline:8px}
+.app.device-mobile .market-nav button svg{display:none}
+.app.device-mobile .nav-spacer,.app.device-mobile .utility-link{display:none}
+.app.device-mobile .publish-button{flex:none;font-size:0;width:38px;padding:0}
+.app.device-mobile .publish-button svg{width:18px}
+.app.device-mobile .main{padding:22px 18px 90px}
+.app.device-mobile .banners{grid-template-columns:1fr;gap:12px}
+.app.device-mobile .service-banner{display:block}
+.app.device-mobile .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 13px}
+.app.device-mobile>.mobile-nav{display:flex;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,480px);background:color-mix(in srgb,var(--surface) 94%,transparent);border-top:1px solid var(--line);z-index:70;height:66px;backdrop-filter:blur(12px);padding-bottom:env(safe-area-inset-bottom)}
+.app.device-mobile>.mobile-nav button{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;color:var(--muted)}
+.app.device-mobile>.mobile-nav span{font-size:9px}
+.app.device-mobile>.mobile-nav .active{color:var(--blue)}
+.app.device-mobile .board{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;padding-bottom:14px;scroll-snap-type:x mandatory}
+.app.device-mobile .board-column{flex:0 0 86%;min-width:86%;width:86%;scroll-snap-align:start}
+.app.device-mobile .board-summary{gap:10px 18px;padding:14px 15px}
+.app.device-mobile .board-summary .muted{width:100%;max-width:none;margin-left:0}
+
+/* Desktop view stays desktop even when selected from a narrow device. */
+.app.device-desktop{min-width:1080px}
+.app.device-desktop>.mobile-nav{display:none!important}
+.app.device-desktop .workspace{padding-bottom:0}
+.app.device-desktop .header-main{height:78px;min-height:78px;padding:0 30px;display:flex;align-items:center;gap:20px}
+.app.device-desktop .brand-logo{width:145px;min-width:145px;height:52px}
+.app.device-desktop .brand-logo img{width:128px}
+.app.device-desktop .search{grid-column:auto;grid-row:auto;height:48px}
+.app.device-desktop .search button{display:block}
+.app.device-desktop .city-select{display:flex}
+.app.device-desktop .top-actions{grid-column:auto;grid-row:auto;display:flex;gap:4px;margin-left:auto}
+.app.device-desktop .top-actions .header-action{display:flex}
+.app.device-desktop .header-action{min-width:64px;width:auto;height:58px;padding:5px 7px}
+.app.device-desktop .header-action small{display:block}
+.app.device-desktop .header-profile{height:58px;min-width:116px;padding:6px 9px;gap:9px}
+.app.device-desktop .profile-summary-text,.app.device-desktop .profile-chevron{display:block}
+.app.device-desktop .header-nav{height:52px;padding:0 30px;overflow:visible;gap:13px}
+.app.device-desktop .mode-toggle{min-width:172px}
+.app.device-desktop .mode-toggle button{font-size:inherit;padding:7px 14px}
+.app.device-desktop .market-nav{display:flex;flex:none}
+.app.device-desktop .market-nav button{font-size:12px;padding:0 12px}
+.app.device-desktop .market-nav button svg{display:block}
+.app.device-desktop .nav-spacer{display:block}
+.app.device-desktop .utility-link{display:flex}
+.app.device-desktop .publish-button{display:flex;width:auto;font-size:12px;padding:0 14px}
+.app.device-desktop .main{padding:28px 30px 40px;max-width:1570px}
+.app.device-desktop .banners{grid-template-columns:1.65fr 1fr}
+.app.device-desktop .product-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+@media(max-width:1180px){
+  .app.device-desktop .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .device-switch{min-width:0;width:100%}
+}
